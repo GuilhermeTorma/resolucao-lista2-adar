@@ -13,7 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 1. Crie um vetor com os valores $e^{x}\cos{x}$ para os valores de $x=(3,3.1,3.2,...,6)$.
 ```{r}
-(x <- seq(from=3, to=6, by=0.1)) 
+(x <- seq(from = 3, to = 6, by = 0.1))
 
 ```
 
@@ -27,21 +27,21 @@ a)$(0.1^{3}\times 0.2^{1}, 0.1^{6}\times 0.2^{4}, ..., 0.1^{36}\times 0.2^{24})$
   
   Onde, x é o primeiro termo e a é a razão.
 ```{r}
-primeiro_termo <- 0.2^(1)*0.1e-03
-segundo_termo <- 0.2^(4)*0.1e-06
-ultimo_termo <- 0.2^(34)*0.1e-36
-razao <- segundo_termo/primeiro_termo
-n <- log(ultimo_termo/primeiro_termo)/log(razao)
-sequencia <- c(0,1:n)
+primeiro_termo <- 0.2^(1) * 0.1e-03
+segundo_termo <- 0.2^(4) * 0.1e-06
+ultimo_termo <- 0.2^(34) * 0.1e-36
+razao <- segundo_termo / primeiro_termo
+n <- log(ultimo_termo / primeiro_termo) / log(razao)
+sequencia <- c(0, 1:n)
 vetor_multiplicador <- razao^sequencia
-vetor_a <- primeiro_termo*(vetor_multiplicador)
+vetor_a <- primeiro_termo * (vetor_multiplicador)
 vetor_a
 ```
 
 b) $\mathbf{(2,\frac{2^{2}}{2}, \frac{2^{3}}{3}, ..., \frac{2^{25}}{25})}$
 ```{r}
 sequencia <- seq(1:25)
-b <- (2^sequencia)/sequencia
+b <- (2^sequencia) / sequencia
 b
 ```
 
@@ -55,10 +55,11 @@ dds
 
 4. Interprete o resultado da seguinte operação 
 ```{r}
-dds_nums <- c(5L, 2L, 5L, 2L, 7L, 7L, 2L,
-              6L, 6L, 3L, 7L, 1L, 2L, 2L,
-              5L, 7L, 3L, 2L, 6L, 4L, 1L
-             )
+dds_nums <- c(
+  5L, 2L, 5L, 2L, 7L, 7L, 2L,
+  6L, 6L, 3L, 7L, 1L, 2L, 2L,
+  5L, 7L, 3L, 2L, 6L, 4L, 1L
+)
 names(dds)[dds_nums]
 ```
 
@@ -75,7 +76,7 @@ b. Escreva o total de números ímpares
 ```{r}
 
 impares <- !pares
-total_impares <- sum(impares) 
+total_impares <- sum(impares)
 total_impares
 ```
 
@@ -93,20 +94,20 @@ a. Verificar se os anos 1894, 1947, 1901, 1992, 1925, 2014, 1993, 1996, 1984, 18
 
 ```{r}
 anos <- c(1894, 1947, 1901, 1992, 1925, 2014, 1993, 1996, 1984, 1897, 2100, 2300)
-anos_bissexto <- anos %% 400 == 0 | anos  %% 100 !=  0 & anos %% 4 == 0
+anos_bissexto <- anos %% 400 == 0 | anos %% 100 != 0 & anos %% 4 == 0
 anos_bissexto
 
 ```
 b.Mostre quais anos são bissexto 
 
 ```{r}
-cada_ano_bissexto <- anos*anos_bissexto
+cada_ano_bissexto <- anos * anos_bissexto
 cada_ano_bissexto[cada_ano_bissexto > 0]
 
 ```
 c. Usando o código para verificar se o ano é bissexto, gere um vetor nomeado `ndias` com o número de dias do ano para os anos do item (a).
 ```{r}
-ndias <- ifelse (
+ndias <- ifelse(
   test = anos_bissexto == TRUE,
   yes = "366 dias",
   no = "365 dias"
@@ -136,22 +137,22 @@ seq_b
 c. 
 ```{r}
 razao <- -2.4434610 - (-3.1415927)
-seq_c <- seq(from = -pi, to = pi, by = razao )
+seq_c <- seq(from = -pi, to = pi, by = razao)
 seq_c
 ```
 
 d. 
 ```{r}
 repeticao <- 2:8
-seq_d <- rep( x = -1:5, times = repeticao)
+seq_d <- rep(x = -1:5, times = repeticao)
 seq_d
 
 ```
 
 e. 
 ```{r}
-repeticao <- c(5,4,3,2,1,2,3,4,5)
-seq_e <- rep( x= repeticao, times = repeticao)
+repeticao <- c(5, 4, 3, 2, 1, 2, 3, 4, 5)
+seq_e <- rep(x = repeticao, times = repeticao)
 seq_e
 ```
 
@@ -163,24 +164,28 @@ a. V3 = (11, 0.25, 7, 2)
 v3 <- c(11, 0.25, 7, 2)
 v2 <- c(11, 0.25)
 v1 <- c(11)
- v0 <- c()
+v0 <- c()
 vetor <- v3
-sequencia <- ifelse (
+sequencia <- ifelse(
   test = vetor == 11,
   yes = 1,
-  no = vetor)
-sequencia <- ifelse (
+  no = vetor
+)
+sequencia <- ifelse(
   test = vetor == 0.25,
   yes = 2,
-  no = sequencia)
-sequencia <- ifelse (
+  no = sequencia
+)
+sequencia <- ifelse(
   test = vetor == 7,
   yes = 3,
-  no = sequencia)
-sequencia <- ifelse (
+  no = sequencia
+)
+sequencia <- ifelse(
   test = vetor == 2,
   yes = 4,
-  no = sequencia)
+  no = sequencia
+)
 (sequencia <- as.integer(sequencia))
 ```
 b. v2 = (11, 0.25)
@@ -189,24 +194,28 @@ b. v2 = (11, 0.25)
 v3 <- c(11, 0.25, 7, 2)
 v2 <- c(11, 0.25)
 v1 <- c(11)
- v0 <- c()
+v0 <- c()
 vetor <- v2
-sequencia <- ifelse (
+sequencia <- ifelse(
   test = vetor == 11,
   yes = 1,
-  no = vetor)
-sequencia <- ifelse (
+  no = vetor
+)
+sequencia <- ifelse(
   test = vetor == 0.25,
   yes = 2,
-  no = sequencia)
-sequencia <- ifelse (
+  no = sequencia
+)
+sequencia <- ifelse(
   test = vetor == 7,
   yes = 3,
-  no = sequencia)
-sequencia <- ifelse (
+  no = sequencia
+)
+sequencia <- ifelse(
   test = vetor == 2,
   yes = 4,
-  no = sequencia)
+  no = sequencia
+)
 (sequencia <- as.integer(sequencia))
 ```
 c. V1 = (11)
@@ -215,24 +224,28 @@ c. V1 = (11)
 v3 <- c(11, 0.25, 7, 2)
 v2 <- c(11, 0.25)
 v1 <- c(11)
- v0 <- c()
+v0 <- c()
 vetor <- v1
-sequencia <- ifelse (
+sequencia <- ifelse(
   test = vetor == 11,
   yes = 1,
-  no = vetor)
-sequencia <- ifelse (
+  no = vetor
+)
+sequencia <- ifelse(
   test = vetor == 0.25,
   yes = 2,
-  no = sequencia)
-sequencia <- ifelse (
+  no = sequencia
+)
+sequencia <- ifelse(
   test = vetor == 7,
   yes = 3,
-  no = sequencia)
-sequencia <- ifelse (
+  no = sequencia
+)
+sequencia <- ifelse(
   test = vetor == 2,
   yes = 4,
-  no = sequencia)
+  no = sequencia
+)
 (sequencia <- as.integer(sequencia))
 ```
 d. V0 = ()
@@ -241,24 +254,28 @@ d. V0 = ()
 v3 <- c(11, 0.25, 7, 2)
 v2 <- c(11, 0.25)
 v1 <- c(11)
- v0 <- c()
+v0 <- c()
 vetor <- v0
-sequencia <- ifelse (
+sequencia <- ifelse(
   test = vetor == 11,
   yes = 1,
-  no = vetor)
-sequencia <- ifelse (
+  no = vetor
+)
+sequencia <- ifelse(
   test = vetor == 0.25,
   yes = 2,
-  no = sequencia)
-sequencia <- ifelse (
+  no = sequencia
+)
+sequencia <- ifelse(
   test = vetor == 7,
   yes = 3,
-  no = sequencia)
-sequencia <- ifelse (
+  no = sequencia
+)
+sequencia <- ifelse(
   test = vetor == 2,
   yes = 4,
-  no = sequencia)
+  no = sequencia
+)
 (sequencia <- as.integer(sequencia))
 ``` 
 
@@ -281,23 +298,25 @@ tar_est2 <- c(
 library(ggplot2)
 horas <- 0:23
 
-qplot(x = horas,
-      y = tar_est1,
-      geom = "point",
-      xlab = "Horas (h)",
-      ylab = "Temperatura (°C)",
-      ylim = c(12, 23),
-      main = "Estação meteorológica 1"
-      )
+qplot(
+  x = horas,
+  y = tar_est1,
+  geom = "point",
+  xlab = "Horas (h)",
+  ylab = "Temperatura (°C)",
+  ylim = c(12, 23),
+  main = "Estação meteorológica 1"
+)
 
-qplot(x = horas,
-      y = tar_est2,
-      geom = "point",
-      xlab = "Horas (h)",
-      ylab = "Temperatura (°C)",
-       ylim = c(12, 23), 
-      main = "Estação meteorológica 2"
-      )
+qplot(
+  x = horas,
+  y = tar_est2,
+  geom = "point",
+  xlab = "Horas (h)",
+  ylab = "Temperatura (°C)",
+  ylim = c(12, 23),
+  main = "Estação meteorológica 2"
+)
 
 
 ```
@@ -310,9 +329,9 @@ qplot(x = horas,
 **b.** Utilizando as variáveis do item anterior, verifique usando comparação lógica, em qual estação o ambiente é mais quente?
 ```{r}
 ifelse(
-test = tmed_est1 > tmed_est2,
-yes = "Estação 1 é mais quente",
-no  = "Estação 2 é mais quente"
+  test = tmed_est1 > tmed_est2,
+  yes = "Estação 1 é mais quente",
+  no = "Estação 2 é mais quente"
 )
 ```
   
@@ -330,16 +349,16 @@ sort(tar_est2, decreasing = TRUE)[3]
 
 Amplitude térmica diária estação 1:
 ```{r}
-tmax_est1 <- max(tar_est1) 
-tmin_est1 <- min(tar_est1)  
+tmax_est1 <- max(tar_est1)
+tmin_est1 <- min(tar_est1)
 (atd_est1 <- round(x = tmax_est1 - tmin_est1, digits = 1))
 
 ```
 Amplitude térmica diária estação 2:
 ```{r}
-tmax_est2 <- max(tar_est2) 
-tmin_est2 <- min(tar_est2)  
-(atd_est2 <- round(x = tmax_est2 - tmin_est2, digits =1 ))
+tmax_est2 <- max(tar_est2)
+tmin_est2 <- min(tar_est2)
+(atd_est2 <- round(x = tmax_est2 - tmin_est2, digits = 1))
 
 ```
 **e.** Qual o horário de ocorrência das temperaturas máximas e mínimas em cada estação? Salve os resultados nas variáveis `hmax_est{i}` e `hmin_est{i}`, com $i=1,2$ 
@@ -383,7 +402,7 @@ A maior diferença absoluta entre as duas estações é de `r maior_diferenca` �
 names(diferenca) <- horas
 diferenca <- (abs(tar_est1 - tar_est2))
 maior_diferenca <- max(diferenca)
-(hora_maior <- names(which (diferenca == maior_diferenca)))
+(hora_maior <- names(which(diferenca == maior_diferenca)))
 ```
 A hora de ocorrência é as `r hora_maior` horas
 
@@ -414,16 +433,16 @@ names(which(diferenca < 0.5))
 
 $T_{med1} = (T_{max}+T_{min})/2$, salvando em uma variável `tar_met1`
 ```{r}
-(tar_med1 <- unname((max(tar_est2) + min(tar_est2))/2))
+(tar_med1 <- unname((max(tar_est2) + min(tar_est2)) / 2))
 ```
 $T_{med2} = (T_{max}+T_{min}+T_{9}+2*T_{21})/5$, salvando em uma variável `tar_met2`
 
 ```{r}
-(tar_med2 <- unname((max(tar_est2) + min(tar_est2)+tar_est2[10]+ 2*tar_est2[22])/5))
+(tar_med2 <- unname((max(tar_est2) + min(tar_est2) + tar_est2[10] + 2 * tar_est2[22]) / 5))
 ```
 $T_{med3} = (T_{7}+T_{14}+2*T_{21})/4$, salvando em uma variável `tar_met3`
 ```{r}
-(tar_med3 <- unname((tar_est2[8]+tar_est2[15]+ 2*tar_est2[22])/4))
+(tar_med3 <- unname((tar_est2[8] + tar_est2[15] + 2 * tar_est2[22]) / 4))
 ```
 
 
@@ -464,48 +483,48 @@ h_temp_min_est1 <- names(which(tar_est1 == temp_min_est1))
 h_temp_min_est1
 h_temp_max_est1 <- names(which(tar_est1 == temp_max_est1))
 h_temp_max_est1
-t_est1 <- (temp_max_est1+temp_min_est1)/2
-a_est1 <- (temp_max_est1-temp_min_est1)/2
+t_est1 <- (temp_max_est1 + temp_min_est1) / 2
+a_est1 <- (temp_max_est1 - temp_min_est1) / 2
 ```
 Para $h<h_{T_{min}}$
 
 ```{r}
 tcalc_est1 <- tar_est1
-cinco_horas <-  as.numeric(h_temp_min_est1)-1
+cinco_horas <- as.numeric(h_temp_min_est1) - 1
 zero_horas <- as.numeric(names(tcalc_est1[1]))
 h_1 <- zero_horas:cinco_horas
-arg_1 <- pi*(h_1+10)/(10+as.numeric(h_temp_min_est1))
-tcalc_est1[(zero_horas+1):(cinco_horas+1)] <- t_est1 + a_est1*cos(arg_1)
-tcalc_est1[(zero_horas+1):(cinco_horas+1)]
+arg_1 <- pi * (h_1 + 10) / (10 + as.numeric(h_temp_min_est1))
+tcalc_est1[(zero_horas + 1):(cinco_horas + 1)] <- t_est1 + a_est1 * cos(arg_1)
+tcalc_est1[(zero_horas + 1):(cinco_horas + 1)]
 ```
 Para $h=h_{T_{min}}$
 
 ```{r}
 seis_horas <- as.numeric(h_temp_min_est1)
 h_2 <- seis_horas
-arg_2 <- pi*(h_2-seis_horas)/(14-seis_horas)
-tcalc_est1[as.numeric(h_temp_min_est1)+1] <- t_est1 - a_est1*cos(arg_2)
-tcalc_est1[as.numeric(h_temp_min_est1)+1]
+arg_2 <- pi * (h_2 - seis_horas) / (14 - seis_horas)
+tcalc_est1[as.numeric(h_temp_min_est1) + 1] <- t_est1 - a_est1 * cos(arg_2)
+tcalc_est1[as.numeric(h_temp_min_est1) + 1]
 ```
 Para $h_{T_{min}}<h<h_{T_{max}}$
 
 ```{r}
-sete_horas <- as.numeric(h_temp_min_est1)+1
-quatorze_horas <- as.numeric(h_temp_max_est1)-1 
+sete_horas <- as.numeric(h_temp_min_est1) + 1
+quatorze_horas <- as.numeric(h_temp_max_est1) - 1
 h_3 <- sete_horas:quatorze_horas
-arg_3 <- pi*(h_3-as.numeric(h_temp_min_est1))/(14-as.numeric(h_temp_min_est1))
-tcalc_est1[(sete_horas+1):(quatorze_horas+1)] <- t_est1 - a_est1*cos(arg_3)
-tcalc_est1[(sete_horas+1):(quatorze_horas+1)]
+arg_3 <- pi * (h_3 - as.numeric(h_temp_min_est1)) / (14 - as.numeric(h_temp_min_est1))
+tcalc_est1[(sete_horas + 1):(quatorze_horas + 1)] <- t_est1 - a_est1 * cos(arg_3)
+tcalc_est1[(sete_horas + 1):(quatorze_horas + 1)]
 ```
 Para $h \geq h_{T_{max}}$
 ```{r}
-quinze_horas <-  as.numeric(h_temp_max_est1)
+quinze_horas <- as.numeric(h_temp_max_est1)
 ultimo_termo <- length(tcalc_est1)
 vinte_tres_horas <- as.numeric(names(tcalc_est1[ultimo_termo]))
-h_4 <- quinze_horas:vinte_tres_horas 
-arg_4 <- pi*(14-h_4)/(10+as.numeric(h_temp_min_est1))
-tcalc_est1[(quinze_horas+1):(vinte_tres_horas+1)] <- t_est1 + a_est1*cos(arg_4)
-tcalc_est1[(quinze_horas+1):(vinte_tres_horas+1)]
+h_4 <- quinze_horas:vinte_tres_horas
+arg_4 <- pi * (14 - h_4) / (10 + as.numeric(h_temp_min_est1))
+tcalc_est1[(quinze_horas + 1):(vinte_tres_horas + 1)] <- t_est1 + a_est1 * cos(arg_4)
+tcalc_est1[(quinze_horas + 1):(vinte_tres_horas + 1)]
 ```
 ```{r}
 tcalc_est1
@@ -520,48 +539,48 @@ h_temp_min_est2 <- names(which(tar_est2 == temp_min_est2))
 h_temp_min_est2
 h_temp_max_est2 <- names(which(tar_est2 == temp_max_est2))
 h_temp_max_est2
-t_est2 <- (temp_max_est2+temp_min_est2)/2
-a_est2 <- (temp_max_est2-temp_min_est2)/2
+t_est2 <- (temp_max_est2 + temp_min_est2) / 2
+a_est2 <- (temp_max_est2 - temp_min_est2) / 2
 ```
 Para $h<h_{T_{min}}$
 
 ```{r}
 tcalc_est2 <- tar_est2
-quatro_horas <-  as.numeric(h_temp_min_est2)-1
+quatro_horas <- as.numeric(h_temp_min_est2) - 1
 zero_horas <- as.numeric(names(tcalc_est2[1]))
 h_1 <- zero_horas:quatro_horas
-arg_1 <- pi*(h_1+10)/(10+as.numeric(h_temp_min_est2))
-tcalc_est2[(zero_horas+1):(quatro_horas+1)] <- t_est2 + a_est2*cos(arg_1)
-tcalc_est2[(zero_horas+1):(quatro_horas+1)]
+arg_1 <- pi * (h_1 + 10) / (10 + as.numeric(h_temp_min_est2))
+tcalc_est2[(zero_horas + 1):(quatro_horas + 1)] <- t_est2 + a_est2 * cos(arg_1)
+tcalc_est2[(zero_horas + 1):(quatro_horas + 1)]
 ```
 Para $h=h_{T_{min}}$
 
 ```{r}
 cinco_horas <- as.numeric(h_temp_min_est2)
 h_2 <- cinco_horas
-arg_2 <- pi*(h_2-cinco_horas)/(14-cinco_horas)
-tcalc_est2[as.numeric(h_temp_min_est2)+1] <- t_est2 - a_est2*cos(arg_2)
-tcalc_est2[as.numeric(h_temp_min_est2)+1]
+arg_2 <- pi * (h_2 - cinco_horas) / (14 - cinco_horas)
+tcalc_est2[as.numeric(h_temp_min_est2) + 1] <- t_est2 - a_est2 * cos(arg_2)
+tcalc_est2[as.numeric(h_temp_min_est2) + 1]
 ```
 Para $h_{T_{min}}<h<h_{T_{max}}$
 
 ```{r}
-seis_horas <- as.numeric(h_temp_min_est2)+1
-treze_horas <- as.numeric(h_temp_max_est2)-1 
+seis_horas <- as.numeric(h_temp_min_est2) + 1
+treze_horas <- as.numeric(h_temp_max_est2) - 1
 h_3 <- seis_horas:treze_horas
-arg_3 <- pi*(h_3-as.numeric(h_temp_min_est2))/(14-as.numeric(h_temp_min_est2))
-tcalc_est2[(seis_horas+1):(treze_horas+1)] <- t_est2 - a_est2*cos(arg_3)
-tcalc_est2[(seis_horas+1):(treze_horas+1)]
+arg_3 <- pi * (h_3 - as.numeric(h_temp_min_est2)) / (14 - as.numeric(h_temp_min_est2))
+tcalc_est2[(seis_horas + 1):(treze_horas + 1)] <- t_est2 - a_est2 * cos(arg_3)
+tcalc_est2[(seis_horas + 1):(treze_horas + 1)]
 ```
 Para $h \geq h_{T_{max}}$
 ```{r}
-quatorze_horas <-  as.numeric(h_temp_max_est2)
+quatorze_horas <- as.numeric(h_temp_max_est2)
 ultimo_termo <- length(tcalc_est2)
 vinte_tres_horas <- as.numeric(names(tcalc_est2[ultimo_termo]))
-h_4 <- quatorze_horas:vinte_tres_horas 
-arg_4 <- pi*(14-h_4)/(10+as.numeric(h_temp_min_est2))
-tcalc_est2[(quatorze_horas+1):(vinte_tres_horas+1)] <- t_est2 + a_est2*cos(arg_4)
-tcalc_est2[(quatorze_horas+1):(vinte_tres_horas+1)]
+h_4 <- quatorze_horas:vinte_tres_horas
+arg_4 <- pi * (14 - h_4) / (10 + as.numeric(h_temp_min_est2))
+tcalc_est2[(quatorze_horas + 1):(vinte_tres_horas + 1)] <- t_est2 + a_est2 * cos(arg_4)
+tcalc_est2[(quatorze_horas + 1):(vinte_tres_horas + 1)]
 ```
 ```{r}
 tcalc_est2
@@ -570,25 +589,25 @@ tcalc_est2
 
 Primeiro caso
 ```{r}
-rmse_est1 <- (sum((tcalc_est1 - tar_est1)^{2})/length(tcalc_est1))^0.5
+rmse_est1 <- (sum((tcalc_est1 - tar_est1)^2) / length(tcalc_est1))^0.5
 rmse_est1
 ```
 Segundo caso
 ```{r}
-rmse_est2 <- (sum((tcalc_est2 - tar_est2)^{2})/length(tcalc_est2))^0.5
+rmse_est2 <- (sum((tcalc_est2 - tar_est2)^2) / length(tcalc_est2))^0.5
 rmse_est2
 ```
 **c.** Calcule a correlação (r) nos dois casos. A barra representa a média aritmética. Confira seu resultado com a saída da função `cor(tar_obs, tar_calc)`.
 $$ r = \frac{\sum_{i=1}^{n}(T_{obs}-\bar{T_{obs}})(T_{calc}-\bar{T_{calc}})}{\sqrt(\sum_{i=1}^{n}(T_{obs}-\bar{T_{obs}})^{2}\sum_{i=1}^{n}(T_{calc}-\bar{T_{calc}})^{2})}$$
 
 ```{r}
-r_est1 <- sum((tar_est1-mean(tar_est1))*(tcalc_est1-mean(tcalc_est1)))/ (sum((tar_est1-mean(tar_est1))^(2))*sum((tcalc_est1-mean(tcalc_est1))^(2)))^0.5
+r_est1 <- sum((tar_est1 - mean(tar_est1)) * (tcalc_est1 - mean(tcalc_est1))) / (sum((tar_est1 - mean(tar_est1))^(2)) * sum((tcalc_est1 - mean(tcalc_est1))^(2)))^0.5
 r_est1
 cor(tar_est1, tcalc_est1)
 ```
 
 ```{r}
-r_est2 <- sum((tar_est2-mean(tar_est2))*(tcalc_est2-mean(tcalc_est2)))/ (sum((tar_est2-mean(tar_est2))^(2))*sum((tcalc_est2-mean(tcalc_est2))^(2)))^0.5
+r_est2 <- sum((tar_est2 - mean(tar_est2)) * (tcalc_est2 - mean(tcalc_est2))) / (sum((tar_est2 - mean(tar_est2))^(2)) * sum((tcalc_est2 - mean(tcalc_est2))^(2)))^0.5
 r_est2
 cor(tar_est2, tcalc_est2)
 
@@ -600,7 +619,7 @@ cor(tar_est2, tcalc_est2)
 ```{r}
 prec <- rep(0.0, times = 7)
 prec <- c(prec, 21.4, 41.2, 2.6, 1.0, 0.4, 0.0)
-hora <- seq(from = 9, to =21, by = 1)
+hora <- seq(from = 9, to = 21, by = 1)
 names(prec) <- hora
 prec
 ```
@@ -632,24 +651,25 @@ c(NA, diff(prec_acum))
  b.Mostre o código para encontrar o horário de ocorrência da precipitação máxima?
 ```{r}
 prec_max <- max(prec)
-names( which (prec == prec_max) )
+names(which(prec == prec_max))
 ```
  
 c. Mostre o código para obter a hora de início e fim do evento de precipitação severa. Qual foi a duração do evento?
 
 ```{r}
-ocorrencia_prec <- ifelse (
-   test = prec == 0,
-   yes = NA,
-   no = prec)
-ocorrencia_prec <-c(names(ocorrencia_prec[!is.na(ocorrencia_prec)]))
+ocorrencia_prec <- ifelse(
+  test = prec == 0,
+  yes = NA,
+  no = prec
+)
+ocorrencia_prec <- c(names(ocorrencia_prec[!is.na(ocorrencia_prec)]))
 inicio_evento <- ocorrencia_prec[1]
 fim_evento <- ocorrencia_prec[length(ocorrencia_prec)]
 inicio_evento
 fim_evento
 ```
 ```{r}
-(duracao_prec <-  length(ocorrencia_prec)) 
+(duracao_prec <- length(ocorrencia_prec))
 ```
 
   O evento de precipitação severa se iniciou as `r inicio_evento` e findou as `r fim_evento` horas. O evento durou `r duracao_prec` horas. 
@@ -661,7 +681,7 @@ total_prec <- (prec_total <- sum(prec))
  A precipitação total foi de `r total_prec`.
 ```{r}
 percentual_17horas <- sum(prec[(1:unname(which(prec == prec["17"])))])
-percentual_17horas <- (percentual_17horas/sum(prec))*100
+percentual_17horas <- (percentual_17horas / sum(prec)) * 100
 percentual_17horas
 ```
  Percentual de `r percentual_17horas` da precipitação ocorreu até às 17h.
@@ -677,7 +697,7 @@ x_positivo <- ifelse(
 )
 x_negativo <- which(x_positivo == FALSE)
 ultimo_negativo <- x_negativo[length(x_negativo)]
-num_positivo <- x[(ultimo_negativo+1)]
+num_positivo <- x[(ultimo_negativo + 1)]
 num_positivo
 ```
 
@@ -703,24 +723,24 @@ prec <- c(
 a. Quantos dias ocorreram no intervalo 0 < prec < 0.25?
  
 ```{r}
-(total_dias <- sum(
-  ifelse( 
-  test = prec > 0 & prec < 0.25,
-  yes = TRUE, 
-  no = FALSE
-  )
-))
+total_dias <- sum(
+  ifelse(
+    test = prec > 0 & prec < 0.25,
+    yes = TRUE,
+    no = FALSE
+  ))
+total_dias
 ```
  Total de `r total_dias` dias.
  
 b. Substitua os valores de chuva registrados no intervalo 0 < prec < 0.25 por 0.
 
 ```{r}
-ifelse( 
+ifelse(
   test = prec > 0 & prec < 0.25,
-  yes = 0, 
+  yes = 0,
   no = prec
-  )
+)
 ```
 C. Crie um vetor denominado `prec01` indicando o estado da precipitação (chuvoso = 1, seco = 0) baseado no limiar de 0.25 mm para detecção de chuva pelo pluviômetro.
 
@@ -735,7 +755,7 @@ d. Qual a probabilidade de chuva dessa série de precipitação diária?
 
   Probabilidade de `r 100*sum(prec01)/length(prec01)`.
 ```{r}
-100*sum(prec01)/length(prec01)
+100 * sum(prec01) / length(prec01)
 
 ```
 e. Qual a probabilidade de chover dois dias consecutivos (`p11`)? Calcule a probabilidade de chover em qualquer um de dois dias consecutivos (`p01` + `p10`)?
@@ -747,26 +767,28 @@ library(tidyverse)
 ```{r}
 deslocado <- lag(prec01)
 deslocado <- deslocado[!is.na(deslocado)]
-primeiro_termo <- ifelse( 
+primeiro_termo <- ifelse(
   test = prec01[1] == 1,
   yes = 1,
-  no = 0)
-dois_dias <- c(primeiro_termo, deslocado)  + prec01
+  no = 0
+)
+dois_dias <- c(primeiro_termo, deslocado) + prec01
 eventos <- length(which(dois_dias == 2))
-p11 <- 100*(eventos/(length(prec01)-1))
+p11 <- 100 * (eventos / (length(prec01) - 1))
 p11
 ```
   A probabilidade de chover dois dias é de `r p11`%.
 ```{r}
 deslocado <- lag(prec01)
 deslocado <- deslocado[!is.na(deslocado)]
-primeiro_termo <- ifelse( 
+primeiro_termo <- ifelse(
   test = prec01[1] == 1,
   yes = 1,
-  no = 0)
-dois_ou_um <- c(primeiro_termo, deslocado)  + prec01
-eventos <- length(which(dois_ou_um == 2 | dois_ou_um == 1 ))
-p10 <- 100*(eventos/(length(prec01)-1))
+  no = 0
+)
+dois_ou_um <- c(primeiro_termo, deslocado) + prec01
+eventos <- length(which(dois_ou_um == 2 | dois_ou_um == 1))
+p10 <- 100 * (eventos / (length(prec01) - 1))
 p10
 ```  
   A probabilidade de chover em qualquer um de dois dias consecutivos é de `r p10`%.
@@ -776,34 +798,37 @@ f. Determine a duração de cada evento chuvoso (número de dias consecutivos).
 ```{r}
 deslocado <- lag(prec01)
 deslocado <- deslocado[!is.na(deslocado)]
-primeiro_termo <- ifelse( 
+primeiro_termo <- ifelse(
   test = prec01[1] == 1,
   yes = 1,
   no = 0
-  )
-eventos01_ini <- c(primeiro_termo, deslocado)  - prec01
+)
+eventos01_ini <- c(primeiro_termo, deslocado) - prec01
 (eventos01_ini <- (which(eventos01_ini < 0)))
 
 deslocado <- lead(prec01)
 deslocado <- deslocado[!is.na(deslocado)]
-ultimo_termo <- ifelse( 
+ultimo_termo <- ifelse(
   test = prec01[length(prec01)] == 1,
   yes = 1,
-  no = 0)
-eventos01_fim <- c(deslocado, ultimo_termo)  - prec01
+  no = 0
+)
+eventos01_fim <- c(deslocado, ultimo_termo) - prec01
 (eventos01_fim <- which(eventos01_fim < 0))
-(duracao <- eventos01_fim- eventos01_ini + 1)
+(duracao <- eventos01_fim - eventos01_ini + 1)
 
 ```
 ```{r}
-duracao2 <- c(evento1 = 1, evento2 = 1, evento3 = 1, evento4 = 1, evento5 = 2, 
-evento6 = 1, evento7 = 2, evento8 = 1, evento9 = 4, evento10 = 1, 
-evento11 = 1, evento12 = 1, evento13 = 1, evento14 = 1, evento15 = 1, 
-evento16 = 1, evento17 = 1, evento18 = 1, evento19 = 2, evento20 = 1, 
-evento21 = 1, evento22 = 1, evento23 = 2, evento24 = 3, evento25 = 1, 
-evento26 = 1, evento27 = 2, evento28 = 1, evento29 = 2, evento30 = 3, 
-evento31 = 2, evento32 = 1, evento33 = 1, evento34 = 1, evento35 = 1, 
-evento36 = 1, evento37 = 1, evento38 = 1, evento39 = 3)
+duracao2 <- c(
+  evento1 = 1, evento2 = 1, evento3 = 1, evento4 = 1, evento5 = 2,
+  evento6 = 1, evento7 = 2, evento8 = 1, evento9 = 4, evento10 = 1,
+  evento11 = 1, evento12 = 1, evento13 = 1, evento14 = 1, evento15 = 1,
+  evento16 = 1, evento17 = 1, evento18 = 1, evento19 = 2, evento20 = 1,
+  evento21 = 1, evento22 = 1, evento23 = 2, evento24 = 3, evento25 = 1,
+  evento26 = 1, evento27 = 2, evento28 = 1, evento29 = 2, evento30 = 3,
+  evento31 = 2, evento32 = 1, evento33 = 1, evento34 = 1, evento35 = 1,
+  evento36 = 1, evento37 = 1, evento38 = 1, evento39 = 3
+)
 nome_eventos <- names(duracao2)
 names(duracao) <- nome_eventos
 duracao
@@ -845,23 +870,25 @@ dados_b01 <- ifelse(
 )
 deslocado <- lag(dados_b01)
 deslocado <- deslocado[!is.na(deslocado)]
-primeiro_termo <- ifelse( 
+primeiro_termo <- ifelse(
   test = dados_b01[1] == 1,
   yes = 1,
-  no = 0)
-eventos01_ini <- c(primeiro_termo, deslocado)  - dados_b01
+  no = 0
+)
+eventos01_ini <- c(primeiro_termo, deslocado) - dados_b01
 (eventos01_ini <- c(primeiro_termo, which(eventos01_ini < 0)))
 
 
 deslocado <- lead(dados_b01)
 deslocado <- deslocado[!is.na(deslocado)]
-ultimo_termo <- ifelse( 
+ultimo_termo <- ifelse(
   test = dados_b01[length(dados_b01)] == 1,
   yes = 1,
-  no = 0)
-eventos01_fim <- c(deslocado, ultimo_termo)  - dados_b01
+  no = 0
+)
+eventos01_fim <- c(deslocado, ultimo_termo) - dados_b01
 (eventos01_fim <- c(which(eventos01_fim < 0)))
-(duracao <- eventos01_fim- eventos01_ini + 1)
+(duracao <- eventos01_fim - eventos01_ini + 1)
 
 ```
 
@@ -883,12 +910,12 @@ $$ u= -V_{h} \cdot \cos{\theta_{rad}}$$
 ```{r}
 theta <- c(270, 180, 360, 90, 225, 315, 135, 45, 0)
 velocidade <- c(10, 10, 10, 10, 14.142, 14.142, 14.142, 14.142, 0)
-velocidade <- (velocidade >= 0.5)*velocidade
-theta_rad <- theta*(pi/180)
-u <- -velocidade*sin(theta_rad)
+velocidade <- (velocidade >= 0.5) * velocidade
+theta_rad <- theta * (pi / 180)
+u <- -velocidade * sin(theta_rad)
 round(u, digits = 2)
-v <-  -velocidade*cos(theta_rad)
-round(v, digits =2)
+v <- -velocidade * cos(theta_rad)
+round(v, digits = 2)
 ```
 b. Faça os cálculos necessários para reconstruir $V_{h}$ e $\theta$, a partir de u e v determinado no item **a**. Por convenção, a direção do vento $\theta$ em condições calmas ($V_{h} < 0.5 m s^{-1}$) é assumida como 0°.
 
@@ -903,10 +930,10 @@ $$\theta = \left \{ \begin{array}{cc}
 0 \ se \ u= 0, v=0 \ ou \ V_{h} < 0.5 \end{array} \right.$$
   A tabela abaixo apresenta o resultado esperado para as variáveis derivadas.
 ```{r}
-theta_mat <- atan2(-u, -v)*(180/pi)
+theta_mat <- atan2(-u, -v) * (180 / pi)
 wd_uv <- ifelse(
   test = theta_mat < 0,
-  yes = theta_mat +360,
+  yes = theta_mat + 360,
   no = theta_mat
 )
 wd_uv
@@ -920,7 +947,6 @@ knitr::include_graphics("questao15.png")
 
 ```{r}
 dir <- c("Oeste", "Sul", "Norte", "Leste", "Sudoeste", "Noroeste", "Sudeste", "Nordeste", "Calmo")
-
 wds <- setNames(
   object = wd_uv,
   nm = dir
@@ -968,15 +994,15 @@ prec_sim <- c(
 ```{r}
 wc_obs <- (prec_obs > 0.25)
 wc_sim <- (prec_sim > 0.25)
-wc <- length(which (wc_obs == wc_sim & wc_obs == TRUE))
-dc <- length(which (wc_obs == wc_sim & wc_obs == FALSE))
-pc <- (wc+dc)/ length(prec_obs)
+wc <- length(which(wc_obs == wc_sim & wc_obs == TRUE))
+dc <- length(which(wc_obs == wc_sim & wc_obs == FALSE))
+pc <- (wc + dc) / length(prec_obs)
 pc
 ```
 ```{r}
-wi <-length(which (wc_obs != wc_sim & wc_obs == TRUE))
-di <- length(which (wc_obs != wc_sim & wc_obs == FALSE))
-csi <- wc/(wc+wi+di)
+wi <- length(which(wc_obs != wc_sim & wc_obs == TRUE))
+di <- length(which(wc_obs != wc_sim & wc_obs == FALSE))
+csi <- wc / (wc + wi + di)
 csi
 ```
  A proporção corretamente prevista é de `r pc`; o índice de sucesso crítico, de `r csi`.
@@ -1001,9 +1027,13 @@ v_prev <- c(
 
 v_obs <- v_obs[which(!is.na(v_prev))]
 v_prev2 <- v_prev[!is.na(v_prev)]
-pbias <- 100*(sum(v_prev2-v_obs))/(sum(v_obs))
+pbias <- 100 * (sum(v_prev2 - v_obs)) / (sum(v_obs))
 pbias
-nse <- 1 - (sum((v_obs - v_prev2)^{2}))/(sum((v_obs - mean(v_obs))^{2}))
+nse <- 1 - (sum((v_obs - v_prev2)^{
+  2
+})) / (sum((v_obs - mean(v_obs))^{
+  2
+}))
 nse
 
 ```
