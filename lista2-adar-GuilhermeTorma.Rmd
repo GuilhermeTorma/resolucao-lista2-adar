@@ -1,0 +1,1046 @@
+---
+title: "Lista 2"
+author: "Guilherme Nunes Torma"
+date: '`r format(Sys.Date()," %d de %B de %Y")`'
+output: html_document
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+1. Crie um vetor com os valores $e^{x}\cos{x}$ para os valores de $x=(3,3.1,3.2,...,6)$.
+```{r}
+(x <- seq(from = 3, to = 6, by = 0.1))
+
+```
+
+2. Crie os seguintes vetores.
+
+a)$(0.1^{3}\times 0.2^{1}, 0.1^{6}\times 0.2^{4}, ..., 0.1^{36}\times 0.2^{24})$
+
+  O vetor é formado por uma progressão geométrica de formato
+  
+  $$ xa^{0}, xa^{1}, xa^{2}, ..., xa^{n} $$
+  
+  Onde, x é o primeiro termo e a é a razão.
+```{r}
+primeiro_termo <- 0.2^(1) * 0.1e-03
+segundo_termo <- 0.2^(4) * 0.1e-06
+ultimo_termo <- 0.2^(34) * 0.1e-36
+razao <- segundo_termo / primeiro_termo
+n <- log(ultimo_termo / primeiro_termo) / log(razao)
+sequencia <- c(0, 1:n)
+vetor_multiplicador <- razao^sequencia
+vetor_a <- primeiro_termo * (vetor_multiplicador)
+vetor_a
+```
+
+b) $\mathbf{(2,\frac{2^{2}}{2}, \frac{2^{3}}{3}, ..., \frac{2^{25}}{25})}$
+```{r}
+sequencia <- seq(1:25)
+b <- (2^sequencia) / sequencia
+b
+```
+
+3. Reproduza a criação do vetor dias da semana (`dds`) mostrado abaixo. 
+```{r}
+dias <- c("domingo", "segunda", "terça", "quarta", "quinta", "sexta", "sabado")
+dds <- seq(1:7)
+names(dds) <- dias
+dds
+```
+
+4. Interprete o resultado da seguinte operação 
+```{r}
+dds_nums <- c(
+  5L, 2L, 5L, 2L, 7L, 7L, 2L,
+  6L, 6L, 3L, 7L, 1L, 2L, 2L,
+  5L, 7L, 3L, 2L, 6L, 4L, 1L
+)
+names(dds)[dds_nums]
+```
+
+  A operação acima retorna um vetor formado pelos nomes dos elementos do vetor dds alocados de acordo com o índice presente no vetor `dds_num`. Assim, o primeiro termo do novo vetor correponde ao termo de posição 5 (5L) do vetor `dds`, ou seja, quinta e os demais termos são definidos de maneira analoga. 
+
+
+5. a. Escreva o código necessário para determinar o vetor lógico indicando quais números são pares na sequência de valores 85, 79, 70, 6, 32, 8, 17, 93, 81, 76.
+```{r}
+sequencia <- c(85, 79, 70, 6, 32, 8, 17, 93, 81, 76)
+pares <- sequencia %% 2 == 0
+pares
+```
+b. Escreva o total de números ímpares
+```{r}
+
+impares <- !pares
+total_impares <- sum(impares)
+total_impares
+```
+
+6. Para um ano ser bissexto, ele deve ser:
+
+* divisível por 4 (a divisão é exata com resto igual a zero)
+
+* não pode ser dívisivel por 100 (a divisão não é exata, ou seja, o resto é diferente de zero)
+
+* pode ser que seja divisível por 400: caso seja divisível por 400, a divisão deve ser exata, deixando o resto igual a zero.
+
+Com os critérios definidos acima, contrua o código para:
+
+a. Verificar se os anos 1894, 1947, 1901, 1992, 1925, 2014, 1993, 1996, 1984, 1897, 2100, 2300 são bissextos.
+
+```{r}
+anos <- c(1894, 1947, 1901, 1992, 1925, 2014, 1993, 1996, 1984, 1897, 2100, 2300)
+anos_bissexto <- anos %% 400 == 0 | anos %% 100 != 0 & anos %% 4 == 0
+anos_bissexto
+
+```
+b.Mostre quais anos são bissexto 
+
+```{r}
+cada_ano_bissexto <- anos * anos_bissexto
+cada_ano_bissexto[cada_ano_bissexto > 0]
+
+```
+c. Usando o código para verificar se o ano é bissexto, gere um vetor nomeado `ndias` com o número de dias do ano para os anos do item (a).
+```{r}
+ndias <- ifelse(
+  test = anos_bissexto == TRUE,
+  yes = "366 dias",
+  no = "365 dias"
+)
+ndias
+
+```
+d. Programe como obter o total de anos com 366 dias
+
+```{r}
+anos_bissexto <- as.numeric(anos_bissexto)
+(total_anos_bissexto <- sum(anos_bissexto))
+
+```
+
+7. Quais códigos para gerar os seguintes dados:
+a.
+```{r}
+seq_a <- c(-30, seq(from = 0, to = 30, by = 5))
+seq_a
+```
+b. 
+```{r}
+seq_b <- seq(from = 1.0, to = 0.0, by = -0.2)
+seq_b
+```
+c. 
+```{r}
+razao <- -2.4434610 - (-3.1415927)
+seq_c <- seq(from = -pi, to = pi, by = razao)
+seq_c
+```
+
+d. 
+```{r}
+repeticao <- 2:8
+seq_d <- rep(x = -1:5, times = repeticao)
+seq_d
+
+```
+
+e. 
+```{r}
+repeticao <- c(5, 4, 3, 2, 1, 2, 3, 4, 5)
+seq_e <- rep(x = repeticao, times = repeticao)
+seq_e
+```
+
+8. Usando o mesmo código para solução em todos os itens abaixo, obtenha as seguintes sequências usando os vetores fornecidos.
+
+a. V3 = (11, 0.25, 7, 2)
+
+```{r}
+v3 <- c(11, 0.25, 7, 2)
+v2 <- c(11, 0.25)
+v1 <- c(11)
+v0 <- c()
+vetor <- v3
+sequencia <- ifelse(
+  test = vetor == 11,
+  yes = 1,
+  no = vetor
+)
+sequencia <- ifelse(
+  test = vetor == 0.25,
+  yes = 2,
+  no = sequencia
+)
+sequencia <- ifelse(
+  test = vetor == 7,
+  yes = 3,
+  no = sequencia
+)
+sequencia <- ifelse(
+  test = vetor == 2,
+  yes = 4,
+  no = sequencia
+)
+(sequencia <- as.integer(sequencia))
+```
+b. v2 = (11, 0.25)
+
+```{r, echo = FALSE}
+v3 <- c(11, 0.25, 7, 2)
+v2 <- c(11, 0.25)
+v1 <- c(11)
+v0 <- c()
+vetor <- v2
+sequencia <- ifelse(
+  test = vetor == 11,
+  yes = 1,
+  no = vetor
+)
+sequencia <- ifelse(
+  test = vetor == 0.25,
+  yes = 2,
+  no = sequencia
+)
+sequencia <- ifelse(
+  test = vetor == 7,
+  yes = 3,
+  no = sequencia
+)
+sequencia <- ifelse(
+  test = vetor == 2,
+  yes = 4,
+  no = sequencia
+)
+(sequencia <- as.integer(sequencia))
+```
+c. V1 = (11)
+
+```{r, echo = FALSE}
+v3 <- c(11, 0.25, 7, 2)
+v2 <- c(11, 0.25)
+v1 <- c(11)
+v0 <- c()
+vetor <- v1
+sequencia <- ifelse(
+  test = vetor == 11,
+  yes = 1,
+  no = vetor
+)
+sequencia <- ifelse(
+  test = vetor == 0.25,
+  yes = 2,
+  no = sequencia
+)
+sequencia <- ifelse(
+  test = vetor == 7,
+  yes = 3,
+  no = sequencia
+)
+sequencia <- ifelse(
+  test = vetor == 2,
+  yes = 4,
+  no = sequencia
+)
+(sequencia <- as.integer(sequencia))
+```
+d. V0 = ()
+ 
+```{r, echo = FALSE}
+v3 <- c(11, 0.25, 7, 2)
+v2 <- c(11, 0.25)
+v1 <- c(11)
+v0 <- c()
+vetor <- v0
+sequencia <- ifelse(
+  test = vetor == 11,
+  yes = 1,
+  no = vetor
+)
+sequencia <- ifelse(
+  test = vetor == 0.25,
+  yes = 2,
+  no = sequencia
+)
+sequencia <- ifelse(
+  test = vetor == 7,
+  yes = 3,
+  no = sequencia
+)
+sequencia <- ifelse(
+  test = vetor == 2,
+  yes = 4,
+  no = sequencia
+)
+(sequencia <- as.integer(sequencia))
+``` 
+
+9. Considere os seguintes dados horários de temperatura do ar ($\mathbf{T_{ar}}$) registrados em duas estações meteorológicas, entre as 0 e 23 horas de um dado dia.
+
+```{r}
+tar_est1 <- c(
+  14.92, 14.61, 14.32, 14.07, 13.84, 13.65, 13.56, 13.97, 15.08,
+  16.5, 17.88, 19.08, 20.02, 20.66, 21.01, 21.05, 20.76, 20.05,
+  18.77, 17.51, 16.67, 16.11, 15.66, 15.27
+)
+tar_est2 <- c(
+  13.13, 13.01, 12.93, 12.87, 12.82, 12.81, 13.2, 14.22, 15.77,
+  17.49, 19.2, 20.57, 21.49, 22.01, 22.03, 21.71, 20.84, 18.77,
+  16.54, 15.13, 14.34, 13.81, 13.49, 13.28
+)
+
+```
+```{r, echo = FALSE}
+library(ggplot2)
+horas <- 0:23
+
+qplot(
+  x = horas,
+  y = tar_est1,
+  geom = "point",
+  xlab = "Horas (h)",
+  ylab = "Temperatura (°C)",
+  ylim = c(12, 23),
+  main = "Estação meteorológica 1"
+)
+
+qplot(
+  x = horas,
+  y = tar_est2,
+  geom = "point",
+  xlab = "Horas (h)",
+  ylab = "Temperatura (°C)",
+  ylim = c(12, 23),
+  main = "Estação meteorológica 2"
+)
+
+
+```
+
+**a.** Determine a média diária $T_{ar}$ das duas estações arredondando para uma casa decimal. Salve a média de cada estação nas variáveis `tmed_est1` e `tmed_est2`.
+```{r}
+(tmed_est1 <- round(x = mean(tar_est1), digits = 1))
+(tmed_est2 <- round(x = mean(tar_est2), digits = 1))
+```
+**b.** Utilizando as variáveis do item anterior, verifique usando comparação lógica, em qual estação o ambiente é mais quente?
+```{r}
+ifelse(
+  test = tmed_est1 > tmed_est2,
+  yes = "Estação 1 é mais quente",
+  no = "Estação 2 é mais quente"
+)
+```
+  
+**c.** Obtenha a 3ª maior temperatura do dia em cada estação.
+
+Temperatura mais alta da estação 1:
+```{r}
+sort(tar_est1, decreasing = TRUE)[3]
+```
+Temperatura mais alta da estação 2:
+```{r}
+sort(tar_est2, decreasing = TRUE)[3]
+```
+**d.** Calcule a amplitude térmica diária ($ATD=T_{max}-T{min}$, onde $T_{max}$: temperatura máxima diária e $T_{min}$: temperatura miníma diária) das estações 1 e 2, arrendondando para uma casa decimal. Salve os resultados nas variaveis `atd_est1` e `atd_est2`.
+
+Amplitude térmica diária estação 1:
+```{r}
+tmax_est1 <- max(tar_est1)
+tmin_est1 <- min(tar_est1)
+(atd_est1 <- round(x = tmax_est1 - tmin_est1, digits = 1))
+
+```
+Amplitude térmica diária estação 2:
+```{r}
+tmax_est2 <- max(tar_est2)
+tmin_est2 <- min(tar_est2)
+(atd_est2 <- round(x = tmax_est2 - tmin_est2, digits = 1))
+
+```
+**e.** Qual o horário de ocorrência das temperaturas máximas e mínimas em cada estação? Salve os resultados nas variáveis `hmax_est{i}` e `hmin_est{i}`, com $i=1,2$ 
+
+```{r}
+names(tar_est1) <- horas
+condicao_max <- tar_est1 == max(tar_est1)
+(hmax_est1 <- names(tar_est1[condicao_max]))
+condicao_min <- tar_est1 == min(tar_est1)
+(hmin_est1 <- names(tar_est1[condicao_min]))
+```
+    Os horários de ocorrência das temperaturas máxima e mínima da estação 1 são às `r hmax_est1` e às `r hmin_est1` horas respectivamente.
+  
+```{r}
+names(tar_est2) <- horas
+condicao_max <- tar_est2 == max(tar_est2)
+(hmax_est2 <- names(tar_est2[condicao_max]))
+condicao_min <- tar_est2 == min(tar_est2)
+(hmin_est2 <- names(tar_est2[condicao_min]))
+```
+Os horários de ocorrência das temperaturas máxima e mínima da estação 2 são as `r hmax_est2` e `r hmin_est2` horas respectivamente.
+
+**f.** Quando `tar_est2` é maior que `tar_est1` e qual a maior diferença absoluta de temperatura entre as duas estações?
+  
+```{r}
+tar_est2_maior <- names(which(tar_est2 > tar_est1))
+(tar_est2_inicio <- tar_est2_maior[1])
+(tar_est2_fim <- tar_est2_maior[length(tar_est2_maior)])
+```
+  A temperatura registrada pela estação 2 é maior das `r tar_est2_inicio` até as `r tar_est2_fim` horas.
+  
+```{r}
+diferenca <- unname(abs(tar_est1 - tar_est2))
+(maior_diferenca <- max(diferenca))
+```
+A maior diferença absoluta entre as duas estações é de `r maior_diferenca` °C.
+
+**g.** Qual a hora correspondende a ocorrência daquela maior diferença absoluta de temperatura obtida no item anterior?
+
+```{r}
+names(diferenca) <- horas
+diferenca <- (abs(tar_est1 - tar_est2))
+maior_diferenca <- max(diferenca)
+(hora_maior <- names(which(diferenca == maior_diferenca)))
+```
+A hora de ocorrência é as `r hora_maior` horas
+
+**h.** O horário do pôr do sol pode ser estimado a partir da $T_{ar}$. Para o período após o horário de ocorrência da $T_{max}$  determina-se em qual hora ocorre a maior queda de $T_{ar}$ em relação a hora anterior. Estime o horário do pôr do sol para as duas estações ( `hps_est{i}`).
+
+```{r}
+hps_est1 <- names(which(abs(diff(tar_est1)[12:23]) == max(abs(diff(tar_est1)[12:23]))))
+hps_est1
+
+```
+O horário estimado do pôr do sol para a estação 1 foi às `r as.numeric(hps_est1)` horas.
+
+```{r}
+hps_est2 <- names(which(abs(diff(tar_est2)[12:23]) == max(abs(diff(tar_est2)[12:23]))))
+hps_est2
+```
+O horário estimado do pôr do sol para a estação 2 foi às `r as.numeric(hps_est2)` horas.
+
+**i.** Em quais horas as temperaturas das duas estações estão mais próximas uma da outra, ou seja, com menos de 0,5°C de diferença ?
+
+```{r}
+names(which(diferenca < 0.5))
+```
+
+ As horas em que isso ocorre são às 6, 7 e 16 horas.
+
+**j.** Calcule a temperatura média diária usando os seguintes métodos para estação 2.
+
+$T_{med1} = (T_{max}+T_{min})/2$, salvando em uma variável `tar_met1`
+```{r}
+(tar_med1 <- unname((max(tar_est2) + min(tar_est2)) / 2))
+```
+$T_{med2} = (T_{max}+T_{min}+T_{9}+2*T_{21})/5$, salvando em uma variável `tar_met2`
+
+```{r}
+(tar_med2 <- unname((max(tar_est2) + min(tar_est2) + tar_est2[10] + 2 * tar_est2[22]) / 5))
+```
+$T_{med3} = (T_{7}+T_{14}+2*T_{21})/4$, salvando em uma variável `tar_met3`
+```{r}
+(tar_med3 <- unname((tar_est2[8] + tar_est2[15] + 2 * tar_est2[22]) / 4))
+```
+
+
+**k.**Compare este resultados com aqueles obtidos no item **a**. Qual é melhor?
+
+```{r}
+tmed_est2
+tar_med1
+tar_med2
+tar_med3
+```
+ A `tar_med1` ficou acima da `tmed_est2`, no tempo em que,`tar_med2` e `tar_met3` ficaram abaixo. O valor mais próximo da média aritmética simples foi a `tar_med2` na qual a diferenca foi de `r tmed_est2 - tar_med2 ` °C. 
+
+10. Calcule a temperatura do ar horária usando o **modelo de onda** para representação do ciclo diário da temperatura do ar, descrito pelas seguintes equações:
+
+$$ \left \{\begin{array}{cc}
+h_{T_{min}} \leq h < h_{T_{max}},\ T_{calc} = T-A\cos{arg} \\
+demais\ horas,\ T_{calc} = T+A\cos{arg} \end{array} \right.  $$
+
+onde: 
+$$ T = \left( \frac{T_{max}+T_{min}}{2}\right)$$
+e
+
+$$ A = \left( \frac{T_{max}-T_{min}}{2}\right)$$
+O argumento do cosseno ($arg$) é definido por:
+
+$$ \left \{\begin{array}{ccc}
+h<h_{T_{min}}, \ arg=\pi\left(\frac{h+10}{10+h_{T_{min}}}\right)\\
+h_{T_{min}}\leq h<h_{T_{max}}, \ arg=\pi\left(\frac{h-h_{T_{min}}}{14-h_{T_{min}}} \right)\\
+h>h_{T_{min}}, \ arg=\pi\left(\frac{14-h}{10+h_{T_{min}}}\right) \end{array} \right.$$
+**a.** Aplique o método acima para estação 1 e 2 substituindo os valores de $T_{max}, T_{min}, h_{T_{min}}$ e $h_{T_{max}}$ adequadamente.
+```{r}
+temp_max_est1 <- max(tar_est1)
+temp_max_est1
+temp_min_est1 <- min(tar_est1)
+temp_min_est1
+h_temp_min_est1 <- names(which(tar_est1 == temp_min_est1))
+h_temp_min_est1
+h_temp_max_est1 <- names(which(tar_est1 == temp_max_est1))
+h_temp_max_est1
+t_est1 <- (temp_max_est1 + temp_min_est1) / 2
+a_est1 <- (temp_max_est1 - temp_min_est1) / 2
+```
+Para $h<h_{T_{min}}$
+
+```{r}
+tcalc_est1 <- tar_est1
+cinco_horas <- as.numeric(h_temp_min_est1) - 1
+zero_horas <- as.numeric(names(tcalc_est1[1]))
+h_1 <- zero_horas:cinco_horas
+arg_1 <- pi * (h_1 + 10) / (10 + as.numeric(h_temp_min_est1))
+tcalc_est1[(zero_horas + 1):(cinco_horas + 1)] <- t_est1 + a_est1 * cos(arg_1)
+tcalc_est1[(zero_horas + 1):(cinco_horas + 1)]
+```
+Para $h=h_{T_{min}}$
+
+```{r}
+seis_horas <- as.numeric(h_temp_min_est1)
+h_2 <- seis_horas
+arg_2 <- pi * (h_2 - seis_horas) / (14 - seis_horas)
+tcalc_est1[as.numeric(h_temp_min_est1) + 1] <- t_est1 - a_est1 * cos(arg_2)
+tcalc_est1[as.numeric(h_temp_min_est1) + 1]
+```
+Para $h_{T_{min}}<h<h_{T_{max}}$
+
+```{r}
+sete_horas <- as.numeric(h_temp_min_est1) + 1
+quatorze_horas <- as.numeric(h_temp_max_est1) - 1
+h_3 <- sete_horas:quatorze_horas
+arg_3 <- pi * (h_3 - as.numeric(h_temp_min_est1)) / (14 - as.numeric(h_temp_min_est1))
+tcalc_est1[(sete_horas + 1):(quatorze_horas + 1)] <- t_est1 - a_est1 * cos(arg_3)
+tcalc_est1[(sete_horas + 1):(quatorze_horas + 1)]
+```
+Para $h \geq h_{T_{max}}$
+```{r}
+quinze_horas <- as.numeric(h_temp_max_est1)
+ultimo_termo <- length(tcalc_est1)
+vinte_tres_horas <- as.numeric(names(tcalc_est1[ultimo_termo]))
+h_4 <- quinze_horas:vinte_tres_horas
+arg_4 <- pi * (14 - h_4) / (10 + as.numeric(h_temp_min_est1))
+tcalc_est1[(quinze_horas + 1):(vinte_tres_horas + 1)] <- t_est1 + a_est1 * cos(arg_4)
+tcalc_est1[(quinze_horas + 1):(vinte_tres_horas + 1)]
+```
+```{r}
+tcalc_est1
+```
+
+```{r}
+temp_max_est2 <- max(tar_est2)
+temp_max_est2
+temp_min_est2 <- min(tar_est2)
+temp_min_est2
+h_temp_min_est2 <- names(which(tar_est2 == temp_min_est2))
+h_temp_min_est2
+h_temp_max_est2 <- names(which(tar_est2 == temp_max_est2))
+h_temp_max_est2
+t_est2 <- (temp_max_est2 + temp_min_est2) / 2
+a_est2 <- (temp_max_est2 - temp_min_est2) / 2
+```
+Para $h<h_{T_{min}}$
+
+```{r}
+tcalc_est2 <- tar_est2
+quatro_horas <- as.numeric(h_temp_min_est2) - 1
+zero_horas <- as.numeric(names(tcalc_est2[1]))
+h_1 <- zero_horas:quatro_horas
+arg_1 <- pi * (h_1 + 10) / (10 + as.numeric(h_temp_min_est2))
+tcalc_est2[(zero_horas + 1):(quatro_horas + 1)] <- t_est2 + a_est2 * cos(arg_1)
+tcalc_est2[(zero_horas + 1):(quatro_horas + 1)]
+```
+Para $h=h_{T_{min}}$
+
+```{r}
+cinco_horas <- as.numeric(h_temp_min_est2)
+h_2 <- cinco_horas
+arg_2 <- pi * (h_2 - cinco_horas) / (14 - cinco_horas)
+tcalc_est2[as.numeric(h_temp_min_est2) + 1] <- t_est2 - a_est2 * cos(arg_2)
+tcalc_est2[as.numeric(h_temp_min_est2) + 1]
+```
+Para $h_{T_{min}}<h<h_{T_{max}}$
+
+```{r}
+seis_horas <- as.numeric(h_temp_min_est2) + 1
+treze_horas <- as.numeric(h_temp_max_est2) - 1
+h_3 <- seis_horas:treze_horas
+arg_3 <- pi * (h_3 - as.numeric(h_temp_min_est2)) / (14 - as.numeric(h_temp_min_est2))
+tcalc_est2[(seis_horas + 1):(treze_horas + 1)] <- t_est2 - a_est2 * cos(arg_3)
+tcalc_est2[(seis_horas + 1):(treze_horas + 1)]
+```
+Para $h \geq h_{T_{max}}$
+```{r}
+quatorze_horas <- as.numeric(h_temp_max_est2)
+ultimo_termo <- length(tcalc_est2)
+vinte_tres_horas <- as.numeric(names(tcalc_est2[ultimo_termo]))
+h_4 <- quatorze_horas:vinte_tres_horas
+arg_4 <- pi * (14 - h_4) / (10 + as.numeric(h_temp_min_est2))
+tcalc_est2[(quatorze_horas + 1):(vinte_tres_horas + 1)] <- t_est2 + a_est2 * cos(arg_4)
+tcalc_est2[(quatorze_horas + 1):(vinte_tres_horas + 1)]
+```
+```{r}
+tcalc_est2
+```
+**b.** Calcule o RMSE nos dois casos. $$RMSE = \sqrt{\frac{1}{n}\sum_{i=1}^{n}(T_{calc}-T_{abs})^{2}}$$
+
+Primeiro caso
+```{r}
+rmse_est1 <- (sum((tcalc_est1 - tar_est1)^2) / length(tcalc_est1))^0.5
+rmse_est1
+```
+Segundo caso
+```{r}
+rmse_est2 <- (sum((tcalc_est2 - tar_est2)^2) / length(tcalc_est2))^0.5
+rmse_est2
+```
+**c.** Calcule a correlação (r) nos dois casos. A barra representa a média aritmética. Confira seu resultado com a saída da função `cor(tar_obs, tar_calc)`.
+$$ r = \frac{\sum_{i=1}^{n}(T_{obs}-\bar{T_{obs}})(T_{calc}-\bar{T_{calc}})}{\sqrt(\sum_{i=1}^{n}(T_{obs}-\bar{T_{obs}})^{2}\sum_{i=1}^{n}(T_{calc}-\bar{T_{calc}})^{2})}$$
+
+```{r}
+r_est1 <- sum((tar_est1 - mean(tar_est1)) * (tcalc_est1 - mean(tcalc_est1))) / (sum((tar_est1 - mean(tar_est1))^(2)) * sum((tcalc_est1 - mean(tcalc_est1))^(2)))^0.5
+r_est1
+cor(tar_est1, tcalc_est1)
+```
+
+```{r}
+r_est2 <- sum((tar_est2 - mean(tar_est2)) * (tcalc_est2 - mean(tcalc_est2))) / (sum((tar_est2 - mean(tar_est2))^(2)) * sum((tcalc_est2 - mean(tcalc_est2))^(2)))^0.5
+r_est2
+cor(tar_est2, tcalc_est2)
+
+```
+  Os resultados obtidos através da fórmula e da saída da função foram os mesmos.
+
+11. Os dados abaixo são de precipitação horária de um evento severo ocorrido em 03/12/2012 em Santa Maria-RS.
+
+```{r}
+prec <- rep(0.0, times = 7)
+prec <- c(prec, 21.4, 41.2, 2.6, 1.0, 0.4, 0.0)
+hora <- seq(from = 9, to = 21, by = 1)
+names(prec) <- hora
+prec
+```
+
+
+```{r}
+tab_1 <- data.frame(
+  horas = hora,
+  prec = unname(prec)
+)
+knitr::kable(tab_1) 
+
+```
+
+
+
+a. Como seria o código para determinar a soma cumulativa da precipitação horária? Salve o resultado em um vetor chamado `prec_acum`. Interprete o resultado de `c(NA, diff(prec_acum))`.
+
+```{r}
+(prec_acum <- cumsum(prec))
+```
+
+```{r}
+c(NA, diff(prec_acum))
+```
+  
+  A função `diff()` processa a diferença entre o termo e o seu antecessor, de maneira oposta, a função `cumsum` realiza a soma acumulada, ou seja, a soma do termo com o seu sucessor. Dessa forma, ao realizar `diff(prec_acum)` ou, implicitamente, `diff(cumsum(prec))` retorna o vetor `prec` sem o termo inicial que neste caso foi substituido por `NA`.  
+ 
+ b.Mostre o código para encontrar o horário de ocorrência da precipitação máxima?
+```{r}
+prec_max <- max(prec)
+names(which(prec == prec_max))
+```
+ 
+c. Mostre o código para obter a hora de início e fim do evento de precipitação severa. Qual foi a duração do evento?
+
+```{r}
+ocorrencia_prec <- ifelse(
+  test = prec == 0,
+  yes = NA,
+  no = prec
+)
+ocorrencia_prec <- c(names(ocorrencia_prec[!is.na(ocorrencia_prec)]))
+inicio_evento <- ocorrencia_prec[1]
+fim_evento <- ocorrencia_prec[length(ocorrencia_prec)]
+inicio_evento
+fim_evento
+```
+```{r}
+(duracao_prec <- length(ocorrencia_prec))
+```
+
+  O evento de precipitação severa se iniciou as `r inicio_evento` e findou as `r fim_evento` horas. O evento durou `r duracao_prec` horas. 
+  
+d. Qual foi a precipitação total do evento? Quanto da precipitação total do evento, em %, ocorreu até às 17 h?
+```{r}
+total_prec <- (prec_total <- sum(prec))
+```
+ A precipitação total foi de `r total_prec`.
+```{r}
+percentual_17horas <- sum(prec[(1:unname(which(prec == prec["17"])))])
+percentual_17horas <- (percentual_17horas / sum(prec)) * 100
+percentual_17horas
+```
+ Percentual de `r percentual_17horas` da precipitação ocorreu até às 17h.
+ 
+12. Considere o vetor `x` definido pelos números descritos abaixo. Mostre como encontrar o primeiro número positivo localizado após o último número negativo. Por exemplo, seja o vetor z definido pelos valores (11, 10, 15, 2, 6, -15, -10, -22, -8, 5, 7, 2, 12, 8, 4, 1, 3, -3, -1, 30, 14). Os valores selecionados seriam 5 e 30.
+
+```{r}
+x <- c(11, 10, 15, 2, 6, -15, -10, -22, -8, 5, 7, 2, 12, 8, 4, 1, 3, -3, -1, 30, 14)
+x_positivo <- ifelse(
+  test = x < 0,
+  yes = FALSE,
+  no = TRUE
+)
+x_negativo <- which(x_positivo == FALSE)
+ultimo_negativo <- x_negativo[length(x_negativo)]
+num_positivo <- x[(ultimo_negativo + 1)]
+num_positivo
+```
+
+13. Considerando o vetor `prec` com valores de precipitação diária indicado abaixo. Escreva o código para resolver as seguintes tarefas.
+```{r}
+prec <- c(
+  0, 0, 0, 0.8, 0, 0.01, 0.75, 0,
+  0, 0, 0, 0.35, 0.08, 0, 0, 0, 0, 0.31, 0, 3.57, 12.17, 0, 0,
+  0, 0.04, 3.16, 0, 0.95, 0.79, 0, 0, 0, 0, 0, 3.51, 0, 0, 0.16,
+  0, 0, 8.16, 0.54, 4.39, 1.24, 0, 0, 0, 0, 0, 2.43, 0, 0, 0, 0,
+  0, 7.18, 0, 0, 0.26, 0, 0, 0.28, 0, 0, 0.09, 0.38, 0, 0, 0, 0,
+  0, 0, 0.51, 0, 0, 0, 0, 0, 0, 0.67, 0, 0, 0, 0, 0.15, 0, 0.82,
+  0, 0, 0, 0, 0, 0, 0, 0, 0.37, 0, 0.58, 4.95, 0, 0, 0, 0, 0, 7.68,
+  0, 0, 0.37, 0, 1.56, 0, 0, 0, 0.34, 0.48, 0, 4.21, 2.28, 4.3,
+  0, 3.38, 0, 0, 0, 0, 7.28, 0, 4.89, 3.91, 0, 0, 0, 0, 0, 0, 2.93,
+  0, 2.49, 0.77, 0, 2.9, 3.53, 0.83, 0, 0, 0, 0.94, 0.59, 0, 0,
+  0, 0, 0.04, 0, 0.65, 0, 0, 0, 6.23, 0.09, 0, 0.66, 0, 0, 0, 4.42,
+  0, 0, 0, 0.84, 0, 0, 0, 0, 0, 0.09, 0, 0, 0.08, 0, 0.66, 0, 0,
+  0, 0.06, 0, 0, 0, 3.28, 0, 0.8, 5.69, 0.8, 0
+)
+```
+
+a. Quantos dias ocorreram no intervalo 0 < prec < 0.25?
+ 
+```{r}
+total_dias <- sum(
+  ifelse(
+    test = prec > 0 & prec < 0.25,
+    yes = TRUE,
+    no = FALSE
+  ))
+total_dias
+```
+ Total de `r total_dias` dias.
+ 
+b. Substitua os valores de chuva registrados no intervalo 0 < prec < 0.25 por 0.
+
+```{r}
+ifelse(
+  test = prec > 0 & prec < 0.25,
+  yes = 0,
+  no = prec
+)
+```
+C. Crie um vetor denominado `prec01` indicando o estado da precipitação (chuvoso = 1, seco = 0) baseado no limiar de 0.25 mm para detecção de chuva pelo pluviômetro.
+
+```{r}
+limiar <- 0.25
+prec01 <- prec > limiar
+prec01 <- as.numeric(prec01)
+prec01
+```
+
+d. Qual a probabilidade de chuva dessa série de precipitação diária?
+
+  Probabilidade de `r 100*sum(prec01)/length(prec01)`.
+```{r}
+100 * sum(prec01) / length(prec01)
+
+```
+e. Qual a probabilidade de chover dois dias consecutivos (`p11`)? Calcule a probabilidade de chover em qualquer um de dois dias consecutivos (`p01` + `p10`)?
+  
+```{r,echo = FALSE}
+library(tidyverse)
+```
+
+```{r}
+deslocado <- lag(prec01)
+deslocado <- deslocado[!is.na(deslocado)]
+primeiro_termo <- ifelse(
+  test = prec01[1] == 1,
+  yes = 1,
+  no = 0
+)
+dois_dias <- c(primeiro_termo, deslocado) + prec01
+eventos <- length(which(dois_dias == 2))
+p11 <- 100 * (eventos / (length(prec01) - 1))
+p11
+```
+  A probabilidade de chover dois dias é de `r p11`%.
+```{r}
+dois_ou_um <- c(primeiro_termo, deslocado) + prec01
+eventos <- length(which(dois_ou_um == 2 | dois_ou_um == 1))
+p10 <- 100 * (eventos / (length(prec01) - 1))
+p10
+```  
+  A probabilidade de chover em qualquer um de dois dias consecutivos é de `r p10`%.
+  
+f. Determine a duração de cada evento chuvoso (número de dias consecutivos).
+
+```{r}
+deslocado_ini <- lag(prec01)
+deslocado_ini <- deslocado_ini[!is.na(deslocado_ini)]
+primeiro_termo <- ifelse(
+  test = prec01[1] == 1,
+  yes = 1,
+  no = 0
+)
+eventos01_ini <- c(primeiro_termo, deslocado_ini) - prec01
+(eventos01_ini <- (which(eventos01_ini < 0)))
+
+deslocado_fim <- lead(prec01)
+deslocado_fim <- deslocado_fim[!is.na(deslocado_fim)]
+ultimo_termo <- ifelse(
+  test = prec01[length(prec01)] == 1,
+  yes = 1,
+  no = 0
+)
+eventos01_fim <- c(deslocado_fim, ultimo_termo) - prec01
+(eventos01_fim <- which(eventos01_fim < 0))
+(duracao <- eventos01_fim - eventos01_ini + 1)
+
+```
+```{r}
+duracao2 <- c(
+  evento1 = 1, evento2 = 1, evento3 = 1, evento4 = 1, evento5 = 2,
+  evento6 = 1, evento7 = 2, evento8 = 1, evento9 = 4, evento10 = 1,
+  evento11 = 1, evento12 = 1, evento13 = 1, evento14 = 1, evento15 = 1,
+  evento16 = 1, evento17 = 1, evento18 = 1, evento19 = 2, evento20 = 1,
+  evento21 = 1, evento22 = 1, evento23 = 2, evento24 = 3, evento25 = 1,
+  evento26 = 1, evento27 = 2, evento28 = 1, evento29 = 2, evento30 = 3,
+  evento31 = 2, evento32 = 1, evento33 = 1, evento34 = 1, evento35 = 1,
+  evento36 = 1, evento37 = 1, evento38 = 1, evento39 = 3
+)
+nome_eventos <- names(duracao2)
+names(duracao) <- nome_eventos
+duracao
+
+```
+  
+14. Dado o vetor `dados` mostrado abaixo.
+
+```{r}
+dados <- c(
+  NA, NA, 27L, 7L, 4L, 0L, 26L, 15L, 25L, NA, NA, NA, NA, 6L,
+  29L, 18L, 17L, 23L, 20L, 1L, 30L, 13L, NA, NA, NA, NA, NA, NA,
+  NA, 19L
+)
+
+```
+
+a.Como você pode codificar a obtenção de um vetor com zeros nos valores válidos e com números sequenciais dentro das falhas?
+
+```{r}
+dados_a <- ifelse(
+  test = !is.na(dados) == TRUE,
+  yes = 0,
+  no = seq(1:length(dados))
+)
+dados_a
+
+```
+
+b. Como a partir do vetor resultante do item anterior você pode obter um vetor cujo os valores dentro das falhas indique a ordem de ocorrência da falha.
+
+```{r, echo = FALSE, resuls = 'hide'}
+vetor_maior_0 <- which(dados_a > 0)
+vetor_menor_0 <- which(dados_a == 0)
+sequencia <- seq(1:length(vetor_maior_0))
+vetor_maior_0
+sequencia
+dados_a
+(repeticao <- c(diff(vetor_maior_0),1))
+```
+
+c. Qual o código para determinar o tamanho de cada falha?
+
+```{r}
+dados_b01 <- ifelse(
+  test = dados_a != 0,
+  yes = 1,
+  no = 0
+)
+deslocado_ini <- lag(dados_b01)
+deslocado_ini <- deslocado_ini[!is.na(deslocado_ini)]
+primeiro_termo <- ifelse(
+  test = dados_b01[1] == 1,
+  yes = 1,
+  no = 0
+)
+eventos01_ini <- c(primeiro_termo, deslocado_ini) - dados_b01
+eventos01_ini <- c(primeiro_termo, which(eventos01_ini < 0))
+
+
+deslocado_fim <- lead(dados_b01)
+deslocado_fim <- deslocado_fim[!is.na(deslocado_fim)]
+ultimo_termo <- ifelse(
+  test = dados_b01[length(dados_b01)] == 1,
+  yes = 1,
+  no = 0
+)
+eventos01_fim <- c(deslocado_fim, ultimo_termo) - dados_b01
+eventos01_fim <- c(which(eventos01_fim < 0))
+(duracao <- eventos01_fim - eventos01_ini + 1)
+
+```
+
+d. Como determinar o tamanho da maior falha?
+```{r}
+max(duracao)
+```
+
+15. Para os valores de velocidade ($V_{h}$) e a direção do vento ($\theta$) (na convenção meteorológica):
+
+$V_{h}$ = (10, 10, 10, 10, 14.142, 14.142, 14.142, 14.142, 0)
+
+$\theta$ = (270, 180, 360, 90, 225, 315, 135, 45, 0)
+
+a. Determine as componentes  e  do vento.
+
+$$ u= -V_{h} \cdot \sin{\theta_{rad}}$$
+$$ u= -V_{h} \cdot \cos{\theta_{rad}}$$
+```{r}
+theta <- c(270, 180, 360, 90, 225, 315, 135, 45, 0)
+velocidade <- c(10, 10, 10, 10, 14.142, 14.142, 14.142, 14.142, 0)
+velocidade <- (velocidade >= 0.5) * velocidade
+theta_rad <- theta * (pi / 180)
+u <- -velocidade * sin(theta_rad)
+round(u, digits = 2)
+v <- -velocidade * cos(theta_rad)
+round(v, digits = 2)
+```
+b. Faça os cálculos necessários para reconstruir $V_{h}$ e $\theta$, a partir de u e v determinado no item **a**. Por convenção, a direção do vento $\theta$ em condições calmas ($V_{h} < 0.5 m s^{-1}$) é assumida como 0°.
+
+$$ V_{h} = \sqrt{(u^{2}+v^{2})}$$
+
+```{r}
+(ws <- sqrt(u^2+v^2))
+```
+$$ \theta_{mat} = atan2 (-u, -v)\cdot \frac{180}{\pi}$$
+$$\theta = \left \{ \begin{array}{cc}
+\theta_{mat} + 360 \ se \ \theta_{mat} < 0 \\
+0 \ se \ u= 0, v=0 \ ou \ V_{h} < 0.5 \end{array} \right.$$
+  A tabela abaixo apresenta o resultado esperado para as variáveis derivadas.
+```{r}
+theta_mat <- atan2(-u, -v) * (180 / pi)
+wd_uv <- ifelse(
+  test = theta_mat < 0,
+  yes = theta_mat + 360,
+  no = theta_mat
+)
+wd_uv
+```
+ A tabela abaixo apresenta o resultado esperado para as variáveis derivadas.
+
+Dica: ver figura abaixo. 
+```{r, echo=FALSE}
+knitr::include_graphics("questao15.png")
+```
+
+```{r}
+dir <- c("Oeste", "Sul", "Norte", "Leste", "Sudoeste", "Noroeste", "Sudeste", "Nordeste", "Calmo")
+wds <- setNames(
+  object = wd_uv,
+  nm = dir
+)
+```
+
+```{r}
+tab_2 <- data.frame(
+  u = round(x = u, digits = 0),
+  v = round(x = v, digits = 0),
+  ws = ws,
+  wd = theta,
+  wd_uv = wd_uv,
+  dir = dir
+)
+knitr::kable(tab_2) 
+```
+
+16. Para as séries de `prec_obs` e `prec_sim` calcule:
+
+
+  a. A proporção corretamente prevista $PC = \frac{wc+dc}{n}$
+  
+  
+  b. O índice de sucesso crítico $CSI = \frac{wc}{wc+wi+di}$
+  
+  
+ Onde $wc$ e $dc$ são as previsões corretas de dias úmidos ($prec>0,25\ mm\ dia^{-1}$) e secos respectivamente, $wi$ e $di$ são as previsões incorretas de dias úmidos e secos respectivamente $n$ é o n° total de previsões.
+ 
+```{r}
+prec_obs <- c(
+  0, 0, 0, 0.5, 1, 6, 9, 0.2, 1, 0, 0, 0.25,
+  10, 15, 8, 3, 0, 0, 0, 0, 0, 0, 0.25, 0,
+  0, 0, 1, 5, 0, 20, 0, 0, 0, 0, 1, 1,
+  0, 2, 12, 1, 0, 0, 0, 0, 0, 0, 5, 5
+)
+prec_sim <- c(
+  0, 0.2, 0.1, 0, 0, 3, 1, 1, 1, 1, 0, 3,
+  0, 10, 4, 1, 0.3, 0.5, 0.5, 0.5, 0.5, 0, 0.25, 0.25,
+  0.25, 0, 0.5, 3, 0, 5, 0, 0, 0, 0, 0.5, 0,
+  0.25, 0.2, 0, 0.2, 0, 0, 0, 0, 1, 2, 1, 0
+)
+```
+ 
+```{r}
+wc_obs <- (prec_obs > 0.25)
+wc_sim <- (prec_sim > 0.25)
+wc <- length(which(wc_obs == wc_sim & wc_obs == TRUE))
+dc <- length(which(wc_obs == wc_sim & wc_obs == FALSE))
+pc <- (wc + dc) / length(prec_obs)
+pc
+```
+```{r}
+wi <- length(which(wc_obs != wc_sim & wc_obs == TRUE))
+di <- length(which(wc_obs != wc_sim & wc_obs == FALSE))
+csi <- wc / (wc + wi + di)
+csi
+```
+ A proporção corretamente prevista é de `r pc`; o índice de sucesso crítico, de `r csi`.
+ 
+17. Escreva o código para calcular as estatísticas abaixo, entre os vetores de valores observados (`obs`) e previstos (`prev`) por um dado modelo atmosférico, em um dado local.
+
+a. O Viés relativo (%)
+ $$ PBIAS = 100 \frac{\sum_{i=1}^{n}(Prev_{i}-Obs_{i})}{\sum_{i=1}^{n}(Obs_{i})}$$
+b. Coeficente de eficiência de Nash-Sutcliffe (NSE). 
+ $$ NSE = 1- \frac{\sum_{i=1}^{n}(Obs_{i}-Prev_{i})^{2}}{\sum_{i=1}^{n}(Obs_{i}-\bar{Obs_{i}})^{2}} $$
+```{r}
+v_obs <- c(
+  -0.49, 0.27, -0.48, 0.8, -1, 0.1, -1.16,
+  0.58, -1.6, -0.31, 0.45, -0.98, 0.19, 0.73,
+  -0.49, -0.04, -0.11, 0.46, 2.02, -1.05
+)
+v_prev <- c(
+  NA, -0.49, 0.27, -0.48, 0.8, -1, 0.1, -1.16,
+  0.58, -1.6, -0.31, 0.45, -0.98, 0.19, 0.73,
+  -0.49, -0.04, -0.11, 0.46, 2.02
+)
+
+v_obs <- v_obs[which(!is.na(v_prev))]
+v_prev2 <- v_prev[!is.na(v_prev)]
+pbias <- 100 * (sum(v_prev2 - v_obs)) / (sum(v_obs))
+pbias
+nse <- 1 - (sum((v_obs - v_prev2)^{
+  2
+})) / (sum((v_obs - mean(v_obs))^{
+  2
+}))
+nse
+
+```
+   O viés relativo é igual a `r pbias`, o coeficiente de eficiência de Nash-Sutcliff igual a `r nse`.
+
+ 
+ 
